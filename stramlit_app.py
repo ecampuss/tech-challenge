@@ -172,28 +172,10 @@ if submitted:
 
     model = joblib.load('modelo/forest.joblib')
 
-
-
-
-
-    st.subheader("🔎 Debug de Features")
-
-    st.write("🧠 Features esperadas pelo modelo:")
-    st.write(list(model.feature_names_in_))
-
-    st.write("📥 Features geradas pelo app:")
-    st.write(list(resultado_pred.columns))
-
-    faltando = set(model.feature_names_in_) - set(resultado_pred.columns)
-    extras = set(resultado_pred.columns) - set(model.feature_names_in_)
-
-    st.write("❌ Faltando no input:", faltando)
-    st.write("⚠️ Extras no input:", extras)
-
-
-
-
-
+    resultado_pred = resultado_pred.reindex(
+        columns=model.feature_names_in_,
+        fill_value=0
+    )
 
     final_pred = model.predict(resultado_pred)
 
