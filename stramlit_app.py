@@ -180,10 +180,12 @@ if submitted:
     final_pred = model.predict(resultado_pred)
 
     if final_pred[-1] == 0:
-        st.success('### Continue assim cuidando da sua saúde para evitar a obesidade!')
+        st.success('### Keep up the good work taking care of your health to prevent obesity!')
         st.balloons()
     else:
-        st.error('### Você foi diagnosticado com algum grau de obesidade. Favor entrar em contato com a sua unidade de saúde mais próxima. ')
+        st.error("### You have been diagnosed with some degree of obesity. "
+        "Please contact your nearest healthcare unit for proper guidance."
+        )
 
 
 
