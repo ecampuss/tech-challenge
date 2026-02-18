@@ -6,6 +6,8 @@ from utils import OneHotEncodingNames, MinMax
 from sklearn.pipeline import Pipeline
 import joblib
 from joblib import load
+import plotly.express as px
+import plotly.io as pio
 
 dados = pd.read_csv(
     "https://raw.githubusercontent.com/ecampuss/tech-challenge/refs/heads/main/Obesity.csv"
@@ -186,6 +188,34 @@ if submitted:
         st.error("### You have been diagnosed with some degree of obesity. "
         "Please contact your nearest healthcare unit for proper guidance."
         )
+
+    # 1️⃣ Distribuição da obesidade
+        fig1 = px.histogram(df, x="Obesity",
+                            title="Distribuição dos Níveis de Obesidade")
+
+        # 2️⃣ Idade por nível de obesidade
+        fig2 = px.box(df, x="Obesity", y="Age",
+                      title="Idade por Nível de Obesidade")
+
+        # 3️⃣ Atividade física vs obesidade
+        fig3 = px.box(df, x="Obesity", y="FAF",
+                      title="Atividade Física por Nível de Obesidade")
+
+        # 4️⃣ Histórico familiar vs obesidade
+        family_counts = df.groupby(["family_history", "Obesity"]).size().reset_index(name="count")
+        fig4 = px.bar(family_counts,
+                      x="family_history",
+                      y="count",
+                      color="Obesity",
+                      title="Histórico Familiar e Obesidade")
+
+        graphs = [
+            pio.to_html(fig1, full_html=False),
+            pio.to_html(fig2, full_html=False),
+            pio.to_html(fig3, full_html=False),
+            pio.to_html(fig4, full_html=False)
+        ]
+
 
 
 
