@@ -91,14 +91,14 @@ with st.form("form_user"):
     )
 
     FCVC = st.slider(
-        "How frequent do you eat vegetables?",
+        "How frequent do you eat vegetables? (1: rarely, 2: sometimes, 3: always)",
         min_value=1,
         max_value=3,
         value=2
     )
 
     NCP = st.slider(
-        "Number of main meals per day?",
+        "Number of main meals per day? (1 one meal, 2 two meals, 3 three meals, 4 four or more)",
         min_value=1,
         max_value=4,
         value=3
